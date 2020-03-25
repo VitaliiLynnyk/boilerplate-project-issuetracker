@@ -1,9 +1,11 @@
 const { Project } = require('../models');
 
 exports.project_getAllByProjectName = (req, res) => {
-  const { projectName } = req.params;
+  const { project } = req.params;
+  const { updated } = req.query;
+  updated['project_name'] = project;
 
-  Project.find(projectName, (err, arr) => {
+  Project.find(updated, (err, arr) => {
     if (err) {
       res.send(err);
     }
@@ -12,7 +14,7 @@ exports.project_getAllByProjectName = (req, res) => {
 };
 
 exports.project_create = (req, res) => {
-  const { projectName } = req.params;
+  const { project } = req.params;
   const {
     issue_title,
     issue_text,
@@ -21,8 +23,8 @@ exports.project_create = (req, res) => {
     status_text
   } = req.body;
 
-  const project = new Project({
-    project_name: projectName,
+  const newProject = new Project({
+    project_name: project,
     issue_title,
     issue_text,
     created_by,
@@ -40,10 +42,9 @@ exports.project_create = (req, res) => {
   ) {
     return res.send('missing inputs');
   } else {
-    project.save((err, obj) => {
-      if (err) {
-        res.send(err);
-      }
+    newProject.save((err, obj) => {
+      if (err) res.send(err);
+
       res.json(obj);
     });
   }

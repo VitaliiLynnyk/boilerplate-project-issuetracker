@@ -1,10 +1,10 @@
 /*
-*
-*
-*       Complete the API routing below
-*
-*
-*/
+ *
+ *
+ *       Complete the API routing below
+ *
+ *
+ */
 
 'use strict';
 
@@ -14,28 +14,23 @@ var ObjectId = require('mongodb').ObjectID;
 
 const CONNECTION_STRING = process.env.DB; //MongoClient.connect(CONNECTION_STRING, function(err, db) {});
 
-module.exports = function (app) {
+module.exports = app => {
+  app
+    .route('/api/issues/:project')
 
-  app.route('/api/issues/:project')
-  
-    .get(function (req, res){
-      var project = req.params.project;
-      
+    .get((req, res) => {
+      const project = req.params.project;
     })
-    
-    .post(function (req, res){
-      var project = req.params.project;
-      
+
+    .post((req, res) => {
+      const project = req.params.project;
     })
-    
-    .put(function (req, res){
-      var project = req.params.project;
-      
+
+    .put((req, res) => {
+      const project = req.params.project;
     })
-    
-    .delete(function (req, res){
-      var project = req.params.project;
-      
+
+    .delete((req, res) => {
+      const project = req.params.project;
     });
-    
 };

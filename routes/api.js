@@ -30,10 +30,7 @@ module.exports = app => {
   app
     .route('/api/issues/:project')
 
-    .get((req, res) => {
-      //const project = req.params.project;
-    })
-
+    .get(project_controller.project_getAllByProjectName)
     .post(project_controller.project_create)
     .put((req, res) => {
       const project = req.params.project;

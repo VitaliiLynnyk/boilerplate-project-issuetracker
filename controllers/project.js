@@ -1,5 +1,16 @@
 const { Project } = require('../models');
 
+exports.project_getAllByProjectName = (req, res) => {
+  const { projectName } = req.params;
+
+  Project.find(projectName, (err, arr) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(arr);
+  });
+};
+
 exports.project_create = (req, res) => {
   const { projectName } = req.params;
   const {
@@ -31,7 +42,7 @@ exports.project_create = (req, res) => {
   } else {
     project.save((err, obj) => {
       if (err) {
-        return next(err);
+        res.send(err);
       }
       res.json(obj);
     });

@@ -35,8 +35,5 @@ module.exports = app => {
     .put((req, res) => {
       const project = req.params.project;
     })
-
-    .delete((req, res) => {
-      const project = req.params.project;
-    });
+    .delete(project_controller.project_delete);
 };

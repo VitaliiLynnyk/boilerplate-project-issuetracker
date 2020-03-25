@@ -19,10 +19,21 @@ exports.project_create = (req, res) => {
     status_text
   });
 
-  project.save((err, obj) => {
-    if (err) {
-      return next(err);
-    }
-    res.json(obj);
-  });
+  if (
+    issue_title == undefined ||
+    issue_text == undefined ||
+    created_by == undefined ||
+    issue_title.trim() == '' ||
+    issue_text.trim() == '' ||
+    created_by.trim() == ''
+  ) {
+    return res.send('missing inputs');
+  } else {
+    project.save((err, obj) => {
+      if (err) {
+        return next(err);
+      }
+      res.json(obj);
+    });
+  }
 };

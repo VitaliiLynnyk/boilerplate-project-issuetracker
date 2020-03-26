@@ -9,8 +9,6 @@
 'use strict';
 
 var expect = require('chai').expect;
-var MongoClient = require('mongodb');
-var ObjectId = require('mongodb').ObjectID;
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 
@@ -32,8 +30,6 @@ module.exports = app => {
 
     .get(project_controller.project_getAllByProjectName)
     .post(project_controller.project_create)
-    .put((req, res) => {
-      const project = req.params.project;
-    })
+    .put(project_controller.project_update)
     .delete(project_controller.project_delete);
 };

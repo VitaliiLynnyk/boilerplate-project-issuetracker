@@ -49,6 +49,37 @@ exports.project_create = (req, res) => {
   }
 };
 
+exports.project_update = (req, res) => {
+  let updated = req.body;
+  let date = Date();
+  let val = '';
+
+  if (updated._id == undefined || updated._id.trim() == '') {
+    return res.send('please enter id');
+  }
+
+  for (let i in updated) {
+    if (i != '_id') {
+      val += updated[i];
+    }
+  }
+
+  if (val.trim() == '') {
+    return res.send('no updated field sent');
+  } else {
+    Project.findByIdAndUpdate(
+      updated._id,
+      { $set: updated, updated_on: date },
+      { new: true },
+      (err, obj) => {
+        if (err) res.send(`could not update ${updated._id}`);
+
+        if (obj != null) res.send('successfully updated');
+      }
+    );
+  }
+};
+
 exports.project_delete = (req, res) => {
   const { _id } = req.body;
 
